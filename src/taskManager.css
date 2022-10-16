@@ -1,10 +1,33 @@
-.taskManager > header{
-  padding: 25px 20px;
+.taskManager>header {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  padding-top: 10px;
   background-color: hsl(210, 12%, 15%);
   color: white;
   font-size: 28px;
   font-family: cursive;
 }
+
+.taskManager>header>button {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  padding: 20px 15px;
+  background-color: hsl(210, 12%, 15%);
+  color: white;
+  font-size: 15px;
+  font-family: cursive;
+  border: 0ch;
+  margin-left: 60%;
+}
+
+/* .btn {
+  display: flex;
+  flex-flow: column-reverse;
+  align-content: flex-end;
+  
+} */
 
 .taskManager__container {
   width: 95%;
@@ -14,7 +37,7 @@
   flex-direction: column;
 }
 
-.taskManager__container > button {
+.taskManager__container>button {
   border-radius: 5px;
   border: none;
   color: white;
@@ -25,15 +48,15 @@
   cursor: pointer;
 }
 
-.taskManager__container > button:hover{
+.taskManager__container>button:hover {
   background-color: hsl(210, 12%, 25%);
 }
 
-.taskManager__container > button:active{
+.taskManager__container>button:active {
   background-color: hsl(210, 12%, 15%);
 }
 
-.taskManager__tasks{
+.taskManager__tasks {
   display: flex;
   flex-direction: column;
   gap: 20px;
