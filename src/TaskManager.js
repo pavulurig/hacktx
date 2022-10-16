@@ -1,16 +1,21 @@
 import './taskManager.css'
 import Task from './Task'
 import { useState, useEffect } from 'react'
-import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore"
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db, logout } from './firebase'
 import AddTask from './AddTask'
+import { useNavigate } from 'react-router-dom'
 
 function TaskManager({ user }) {
 
   const [openAddModal, setOpenAddModal] = useState(false)
   const [tasks, setTasks] = useState([])
+  const navigate = useNavigate();
 
-
+  const handleClick = () => {
+    logout();
+    navigate("/");
+  }
   /* function to get all tasks from firestore in realtime */
   useEffect(() => {
     const taskColRef = query(collection(db, 'posts'), orderBy('created', 'desc'))
@@ -22,13 +27,12 @@ function TaskManager({ user }) {
     })
   }, [])
 
-
-  const name = user && user.email
+  const newtasks = tasks.filter((task) => task.data.email === user.email)
   return (
     <div className='taskManager'>
       <header>Welcome to Academic Lease {user?.displayName}    <button
         className='btn'
-        onClick={logout}>
+        onClick={handleClick}>
         logout
       </button>
       </header>
@@ -40,10 +44,10 @@ function TaskManager({ user }) {
         </button>
         <div className='taskManager__tasks'>
 
-          {tasks.map((task) => (
+          {newtasks.map((task) => (
             <Task
               id={task.id}
-              email={task.email}
+              email={task.data.email}
               key={task.id}
               completed={task.data.completed}
               title={task.data.title}

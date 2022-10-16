@@ -7,6 +7,7 @@ import { db } from './firebase'
 
 function Task({ id, email, title, description, completed }) {
 
+
   const [checked, setChecked] = useState(completed)
   const [open, setOpen] = useState({ edit: false, view: false })
 
@@ -52,7 +53,8 @@ function Task({ id, email, title, description, completed }) {
           onClick={() => setChecked(!checked)} ></label>
       </div>
       <div className='task__body'>
-        <h2>{title}</h2>
+        <h2>{email}</h2>
+        <h3>{title}</h3>
         <p>{description}</p>
         <div className='task__buttons'>
           <div className='task__deleteNedit'>
@@ -82,6 +84,7 @@ function Task({ id, email, title, description, completed }) {
       {open.edit &&
         <EditTask
           onClose={handleClose}
+          toEditEmail={email}
           toEditTitle={title}
           toEditDescription={description}
           open={open.edit}
