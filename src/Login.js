@@ -20,6 +20,8 @@ function Login() {
 
   return (
     <div className="login">
+      <header>Welcome to Academic Lease
+      </header>
       <div className="login__container">
         <input
           type="text"

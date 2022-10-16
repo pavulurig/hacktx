@@ -1,18 +1,17 @@
 import './taskManager.css'
 import Task from './Task'
-import {useState, useEffect} from 'react'
-import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
-import {db,logout} from './firebase'
+import { useState, useEffect } from 'react'
+import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore"
+import { db, logout } from './firebase'
 import AddTask from './AddTask'
-import { useNavigate } from "react-router-dom";
 
-function TaskManager(props) {
-  const navigate = useNavigate();
+function TaskManager({ user }) {
 
   const [openAddModal, setOpenAddModal] = useState(false)
   const [tasks, setTasks] = useState([])
 
-  /* function to get all tasks from firestore in realtime */ 
+
+  /* function to get all tasks from firestore in realtime */
   useEffect(() => {
     const taskColRef = query(collection(db, 'posts'), orderBy('created', 'desc'))
     onSnapshot(taskColRef, (snapshot) => {
@@ -21,21 +20,21 @@ function TaskManager(props) {
         data: doc.data()
       })))
     })
-  },[])
+  }, [])
 
-  
-  const user={props}
-  console.log({user})
+
+  const name = user && user.email
   return (
     <div className='taskManager'>
-      
-      <header>Welcome to Academic Lease {props.user?.displayName}</header>
-      <button 
-          onClick={logout}>
-          logout
-        </button>
+      <header>Welcome to Academic Lease {user?.displayName}    <button
+        className='btn'
+        onClick={logout}>
+        logout
+      </button>
+      </header>
+
       <div className='taskManager__container'>
-        <button 
+        <button
           onClick={() => setOpenAddModal(true)}>
           Post+
         </button>
@@ -44,19 +43,20 @@ function TaskManager(props) {
           {tasks.map((task) => (
             <Task
               id={task.id}
+              email={task.email}
               key={task.id}
               completed={task.data.completed}
-              title={task.data.title} 
+              title={task.data.title}
               description={task.data.description}
             />
           ))}
 
         </div>
-        
+
       </div>
       {openAddModal &&
-      
-        <AddTask onClose={() => setOpenAddModal(false)} open={openAddModal}/>
+
+        <AddTask onClose={() => setOpenAddModal(false)} open={openAddModal} email={user?.email} />
       }
 
     </div>
