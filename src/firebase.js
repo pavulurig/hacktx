@@ -18,14 +18,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAh7e9BnHBldm1__NcB5e5YFctRFOACPJk",
-    authDomain: "academiclease.firebaseapp.com",
-    projectId: "academiclease",
-    storageBucket: "academiclease.appspot.com",
-    messagingSenderId: "369695969811",
-    appId: "1:369695969811:web:b5c67305743cdd241fe5e6",
-    measurementId: "G-PPTWKQYTKR"
-
+  apiKey: "AIzaSyBoVvgcyFNrG1BiooEdC-nlLo7KcLO8f5g",
+  authDomain: "academiclease-tech.firebaseapp.com",
+  projectId: "academiclease-tech",
+  storageBucket: "academiclease-tech.appspot.com",
+  messagingSenderId: "1012499425827",
+  appId: "1:1012499425827:web:d08e125d947806d1419f96",
+  measurementId: "G-B0E2KWR6R1"
 };
 
 const app = initializeApp(firebaseConfig);
